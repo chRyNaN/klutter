@@ -8,8 +8,8 @@ data class TextInputConfiguration(
     val autocorrect: Boolean = true,
     val actionLabel: String,
     val inputAction: TextInputAction,
-    val textCapitalization: TextCapitalization = TextCapitalization.NONE
-    // TODO val keyboardAppearance: Brightness = Brightness.LIGHT
+    val textCapitalization: TextCapitalization = TextCapitalization.NONE,
+    val keyboardAppearance: Brightness = Brightness.LIGHT
 ) {
 
     fun toTextAffinity(affinity: String): TextAffinity? =

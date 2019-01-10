@@ -1,4 +1,4 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
 import com.chrynan.klutter.ui.TextDirection
 
@@ -12,11 +12,12 @@ abstract class AlignmentGeometry {
 
     abstract fun resolve(direction: TextDirection): AlignmentGeometry
 
-    open fun add(other: AlignmentGeometry): AlignmentGeometry = Alignment(
-        x = x + other.x,
-        start = start + other.start,
-        y = y + other.y
-    )
+    open fun add(other: AlignmentGeometry): AlignmentGeometry =
+        Alignment(
+            x = x + other.x,
+            start = start + other.start,
+            y = y + other.y
+        )
 
     // TODO add operators
 }

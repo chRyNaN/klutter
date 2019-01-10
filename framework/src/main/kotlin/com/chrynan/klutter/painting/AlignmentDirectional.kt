@@ -1,5 +1,7 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
+import com.chrynan.klutter.painting.Alignment
+import com.chrynan.klutter.painting.AlignmentGeometry
 import com.chrynan.klutter.ui.TextDirection
 
 data class AlignmentDirectional(

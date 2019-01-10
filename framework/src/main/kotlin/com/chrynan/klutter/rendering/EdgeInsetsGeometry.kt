@@ -1,5 +1,6 @@
 package com.chrynan.klutter.rendering
 
+import com.chrynan.klutter.painting.Axis
 import com.chrynan.klutter.ui.Size
 import com.chrynan.klutter.ui.TextDirection
 

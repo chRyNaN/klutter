@@ -1,4 +1,4 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
 import com.chrynan.klutter.ui.Radius
 import com.chrynan.klutter.ui.TextDirection
@@ -12,7 +12,7 @@ class BorderRadius(
 
     companion object {
 
-        val ZERO = BorderRadius.all(Radius.ZERO)
+        val ZERO = all(Radius.ZERO)
 
         fun all(radius: Radius) =
             BorderRadius(

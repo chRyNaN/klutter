@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
 import com.chrynan.klutter.ui.Rect
 import com.chrynan.klutter.ui.Size

@@ -1,4 +1,4 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.foundation
 
 enum class DiagnosticLevel {
 

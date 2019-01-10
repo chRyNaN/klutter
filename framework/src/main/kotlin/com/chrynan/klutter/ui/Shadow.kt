@@ -1,6 +1,6 @@
 package com.chrynan.klutter.ui
 
-data class Shadow(
+open class Shadow(
     val color: Color,
     val offset: Offset,
     val blurRadius: Double = 0.0

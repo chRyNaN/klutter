@@ -47,6 +47,9 @@ data class Rect(
     val height: Double
         get() = bottom - top
 
+    val size: Size
+        get() = Size(width = width, height = height)
+
     val shortestSide: Double
         get() = min(width, height)
 

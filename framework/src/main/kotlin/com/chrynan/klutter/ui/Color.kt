@@ -2,7 +2,7 @@
 
 package com.chrynan.klutter.ui
 
-data class Color(val value: Int) {
+open class Color(val value: Int) {
 
     companion object {
 

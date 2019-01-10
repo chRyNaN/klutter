@@ -1,4 +1,4 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
 enum class BoxFit {
 

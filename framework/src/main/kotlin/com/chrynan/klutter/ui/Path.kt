@@ -1,6 +1,6 @@
 package com.chrynan.klutter.ui
 
-expect class Path {
+expect class Path() {
 
     companion object {
 

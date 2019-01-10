@@ -50,5 +50,13 @@ abstract class EdgeInsetsGeometry {
     fun deflateSize(size: Size) =
         Size(width = size.width - horizontal, height = size.height - vertical)
 
-    // TODO add operators
+    operator fun plus(other: EdgeInsetsGeometry) =
+        EdgeInsets(
+            left = left + other.left,
+            top = top + other.top,
+            right = right + other.right,
+            bottom = bottom + other.bottom
+        )
+
+    // TODO add more operators
 }

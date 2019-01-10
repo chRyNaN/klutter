@@ -6,7 +6,7 @@ import com.chrynan.klutter.ui.Rect
 import com.chrynan.klutter.ui.Size
 import com.chrynan.klutter.ui.TextDirection
 
-data class Alignment(
+open class Alignment(
     override val x: Double,
     override val y: Double,
     override val start: Double = 0.0

@@ -1,12 +1,22 @@
 package com.chrynan.klutter.painting
 
 import com.chrynan.klutter.rendering.EdgeInsets
+import com.chrynan.klutter.ui.Canvas
+import com.chrynan.klutter.ui.Path
+import com.chrynan.klutter.ui.Rect
+import com.chrynan.klutter.ui.TextDirection
 
-abstract class ShapeBorder {
+interface ShapeBorder {
 
-    abstract val dimensions: EdgeInsets
+    val dimensions: EdgeInsets
 
-    abstract fun scale(t: Double): ShapeBorder
+    fun add(other: ShapeBorder, reversed: Boolean = false): ShapeBorder
 
-    // TODO
+    fun scale(t: Double): ShapeBorder
+
+    fun getOuterPath(rect: Rect, textDirection: TextDirection = TextDirection.LTR): Path
+
+    fun getInnerPath(rect: Rect, textDirection: TextDirection = TextDirection.LTR): Path
+
+    fun paint(canvas: Canvas, textDirection: TextDirection = TextDirection.LTR)
 }

@@ -1,9 +1,9 @@
 package com.chrynan.klutter.foundation
 
-class DiagnosticableNode<T : Diagnosticable>(
+open class DiagnosticableNode<T : Diagnosticable>(
     name: String? = null,
     override val value: T,
-    style: DiagnosticsTreeStyle
+    style: DiagnosticsTreeStyle = DiagnosticsTreeStyle.SINGLE_LINE
 ) : DiagnosticsNode(name = name, style = style) {
 
     private var cachedBuilder: DiagnosticPropertiesBuilder? = null

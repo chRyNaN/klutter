@@ -1,6 +1,6 @@
 package com.chrynan.klutter.foundation
 
-abstract class Diagnosticable {
+interface Diagnosticable {
 
     fun toDiagnosticsNode(
         name: String? = null,

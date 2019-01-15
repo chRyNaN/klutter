@@ -8,7 +8,7 @@ interface BuildContext {
 
     val size: Size
 
-    // TODO abstract val owner: BuildOwner
+    val owner: BuildOwner
 
     // TODO abstract fun findRenderObject(): RenderObject
 

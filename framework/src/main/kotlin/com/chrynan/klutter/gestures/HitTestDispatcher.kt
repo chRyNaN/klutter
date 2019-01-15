@@ -1,6 +1,6 @@
 package com.chrynan.klutter.gestures
 
-abstract class HitTestDispatcher {
+interface HitTestDispatcher {
 
-    abstract fun dispatchevent(event: PointerEvent, result: HitTestResult)
+    fun dispatchevent(event: PointerEvent, result: HitTestResult)
 }

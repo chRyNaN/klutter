@@ -2,7 +2,7 @@ package com.chrynan.klutter.gestures
 
 import com.chrynan.klutter.ui.Offset
 
-abstract class HitTestable {
+interface HitTestable {
 
-    abstract fun hitTest(result: HitTestResult, position: Offset)
+    fun hitTest(result: HitTestResult, position: Offset)
 }

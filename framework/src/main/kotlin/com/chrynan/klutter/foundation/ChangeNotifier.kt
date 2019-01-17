@@ -1,10 +1,12 @@
 package com.chrynan.klutter.foundation
 
+import com.chrynan.klutter.ui.VoidCallback
+
 interface Listenable {
 
-    abstract fun addListener(listener: () -> Unit)
+    fun addListener(listener: VoidCallback)
 
-    abstract fun removeListener(listener: () -> Unit)
+    fun removeListener(listener: VoidCallback)
 }
 
 interface ValueListenable<T> : Listenable {

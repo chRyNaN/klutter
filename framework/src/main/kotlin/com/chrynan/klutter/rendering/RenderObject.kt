@@ -18,6 +18,10 @@ abstract class RenderObject : AbstractNode(),
         }
     }
 
+    fun reassemble() {
+
+    }
+
     fun adoptChild(child: RenderObject) {
         setupParentData(child)
         super.adoptChild(child)
@@ -35,5 +39,5 @@ abstract class RenderObject : AbstractNode(),
 
     }
 
-    abstract fun visitChildren(visitor: RenderObjectVisitor)
+    fun visitChildren(visitor: RenderObjectVisitor) {}
 }

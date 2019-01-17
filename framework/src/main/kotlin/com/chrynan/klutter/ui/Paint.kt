@@ -1,30 +1,30 @@
 package com.chrynan.klutter.ui
 
-expect class Paint {
+expect class Paint() {
 
-    val blendMode: BlendMode
+    var blendMode: BlendMode
 
-    val color: Color
+    var color: Color
 
-    val colorFilter: ColorFilter
+    var colorFilter: ColorFilter
 
-    val filterQuality: FilterQuality
+    var filterQuality: FilterQuality
 
-    val invertColors: Boolean
+    var invertColors: Boolean
 
-    val isAntiAlias: Boolean
+    var isAntiAlias: Boolean
 
-    val maskFilter: MaskFilter
+    var maskFilter: MaskFilter
 
     // TODO val shader: Shader
 
-    val strokeCap: StrokeCap
+    var strokeCap: StrokeCap
 
-    val strokeJoin: StrokeJoin
+    var strokeJoin: StrokeJoin
 
-    val strokeMiterLimit: Double
+    var strokeMiterLimit: Double
 
-    val strokeWidth: Double
+    var strokeWidth: Double
 
-    val style: PaintingStyle
+    var style: PaintingStyle
 }

@@ -1,44 +1,50 @@
 package com.chrynan.klutter.painting
 
 import com.chrynan.klutter.rendering.EdgeInsets
+import com.chrynan.klutter.rendering.EdgeInsetsGeometry
 import com.chrynan.klutter.ui.*
 
-class RoundedRectangleBorder(
-    val side: BorderSide,
-    val borderRadius: BorderRadius
+class StadiumToRoundedRectangleBorder(
+    val side: BorderSide = BorderSide.NONE,
+    val borderRadius: BorderRadius = BorderRadius.ZERO,
+    val rectness: Double = 0.0
 ) : ShapeBorder {
 
-    override val dimensions: EdgeInsets
+    override val dimensions: EdgeInsetsGeometry
         get() = EdgeInsets.all(side.width)
 
     override fun scale(t: Double) =
-        RoundedRectangleBorder(
+        StadiumToRoundedRectangleBorder(
             side = side.scale(t),
-            borderRadius = borderRadius * t
+            borderRadius = borderRadius * t,
+            rectness = t
         )
 
     override fun getOuterPath(rect: Rect, textDirection: TextDirection) =
         Path().apply {
-            addRRect(borderRadius.resolve(textDirection).toRRect(rect).deflate(side.width))
+            addRRect(adjustBorderRadius(rect).toRRect(rect))
         }
 
     override fun getInnerPath(rect: Rect, textDirection: TextDirection) =
         Path().apply {
-            addRRect(borderRadius.resolve(textDirection).toRRect(rect))
+            addRRect(adjustBorderRadius(rect).toRRect(rect).deflate(side.width))
         }
 
     override fun paint(canvas: Canvas, rect: Rect, textDirection: TextDirection) {
         if (side.style == BorderStyle.SOLID) {
             if (side.width == 0.0) {
-                canvas.drawRRect(borderRadius.resolve(textDirection).toRRect(rect), side.toPaint())
+                canvas.drawRRect(adjustBorderRadius(rect).toRRect(rect), side.toPaint())
             } else {
-                val outer = borderRadius.resolve(textDirection).toRRect(rect)
+                val outer = adjustBorderRadius(rect).toRRect(rect)
                 val inner = outer.deflate(side.width)
                 val paint = Paint().apply {
                     color = side.color
                 }
+
                 canvas.drawDRRect(outer, inner, paint)
             }
         }
     }
+
+    private fun adjustBorderRadius(rect: Rect) = borderRadius
 }

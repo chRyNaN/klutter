@@ -13,7 +13,7 @@ interface BoxBorder : ShapeBorder {
 
     val isUniform: Boolean
 
-    override fun add(other: ShapeBorder, reversed: Boolean): BoxBorder
+    override fun add(other: ShapeBorder, reversed: Boolean): BoxBorder?
 
     override fun getInnerPath(rect: Rect, textDirection: TextDirection) = Path().apply {
         addRect(dimensions.resolve(textDirection).deflateRect(rect))
@@ -25,8 +25,8 @@ interface BoxBorder : ShapeBorder {
 
     fun paint(
         canvas: Canvas,
-        textDirection: TextDirection = TextDirection.LTR,
         rect: Rect,
+        textDirection: TextDirection = TextDirection.LTR,
         boxShape: BoxShape = BoxShape.RECTANGLE,
         borderRadius: BorderRadius
     )

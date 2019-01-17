@@ -26,31 +26,80 @@ class Border(
             }
     }
 
-    override val isUniform: Boolean
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val dimensions: EdgeInsets
+        get() = EdgeInsets(left = left.width, top = top.width, right = right.width, bottom = bottom.width)
 
-    override fun add(other: ShapeBorder, reversed: Boolean): BoxBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override val isUniform: Boolean
+        get() {
+            if ((right.color != top.color) or
+                (bottom.color != top.color) or
+                (left.color != top.color)
+            ) return false
+
+            if ((right.width != top.width) or
+                (bottom.width != top.width) or
+                (left.width != top.width)
+            ) return false
+
+            if ((right.style != top.style) or
+                (bottom.style != top.style) or
+                (left.style != top.style)
+            ) return false
+
+            return true
+        }
+
+    override fun add(other: ShapeBorder, reversed: Boolean): BoxBorder? {
+        if (other !is Border) return null
+        if ((top.canMerge(other.top)) and
+            (right.canMerge(other.right)) and
+            (bottom.canMerge(other.bottom)) and
+            (left.canMerge(other.left))
+        ) return this.merge(other)
+
+        return null
     }
 
     override fun paint(
         canvas: Canvas,
-        textDirection: TextDirection,
         rect: Rect,
+        textDirection: TextDirection,
         boxShape: BoxShape,
         borderRadius: BorderRadius
     ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isUniform) {
+            if (top.style == BorderStyle.SOLID) {
+                if (boxShape == BoxShape.CIRCLE) {
+                    // TODO
+                } else {
+                    // TODO
+                }
+            }
+        }
     }
 
-    override val dimensions: EdgeInsets
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override fun scale(t: Double) =
+        Border(
+            top = top.scale(t),
+            right = right.scale(t),
+            bottom = bottom.scale(t),
+            left = left.scale(t)
+        )
 
-    override fun scale(t: Double): ShapeBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun paint(canvas: Canvas, rect: Rect, textDirection: TextDirection) =
+        paint(
+            canvas = canvas,
+            rect = rect,
+            textDirection = textDirection,
+            boxShape = BoxShape.RECTANGLE,
+            borderRadius = BorderRadius.ZERO
+        )
 
-    override fun paint(canvas: Canvas, textDirection: TextDirection) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    fun merge(other: Border) =
+        Border(
+            top = top.merge(other.top),
+            right = right.merge(other.right),
+            bottom = bottom.merge(other.bottom),
+            left = left.merge(other.left)
+        )
 }

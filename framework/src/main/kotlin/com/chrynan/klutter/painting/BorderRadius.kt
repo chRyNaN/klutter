@@ -1,6 +1,8 @@
 package com.chrynan.klutter.painting
 
+import com.chrynan.klutter.ui.RRect
 import com.chrynan.klutter.ui.Radius
+import com.chrynan.klutter.ui.Rect
 import com.chrynan.klutter.ui.TextDirection
 
 class BorderRadius(
@@ -60,4 +62,20 @@ class BorderRadius(
     override val bottomEnd = Radius.ZERO
 
     override fun resolve(direction: TextDirection) = this
+
+    fun toRRect(rect: Rect) =
+        RRect.fromRectAndCorners(
+            rect,
+            topLeftRadius = topLeft,
+            topRightRadius = topRight,
+            bottomLeftRadius = bottomLeft,
+            bottomRightRadius = bottomRight
+        )
+
+    operator fun times(t: Double) = BorderRadius(
+        topLeft = topLeft * t,
+        topRight = topRight * t,
+        bottomLeft = bottomLeft * t,
+        bottomRight = bottomRight * t
+    )
 }

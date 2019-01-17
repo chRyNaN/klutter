@@ -14,6 +14,24 @@ data class FractionalOffset(
 
     companion object {
 
+        val TOP_LEFT = FractionalOffset(dx = 0.0, dy = 0.0)
+
+        val TOP_CENTER = FractionalOffset(dx = 0.5, dy = 0.0)
+
+        val TOP_RIGHT = FractionalOffset(dx = 1.0, dy = 0.0)
+
+        val CENTER_LEFT = FractionalOffset(dx = 0.0, dy = 0.5)
+
+        val CENTER = FractionalOffset(dx = 0.5, dy = 0.5)
+
+        val CENTER_RIGHT = FractionalOffset(dx = 1.0, dy = 0.5)
+
+        val BOTTOM_LEFT = FractionalOffset(dx = 0.0, dy = 1.0)
+
+        val BOTTOM_CENTER = FractionalOffset(dx = 0.5, dy = 1.0)
+
+        val BOTTOM_RIGHT = FractionalOffset(dx = 1.0, dy = 1.0)
+
         fun fromOffsetAndSize(offset: Offset, size: Size) =
             FractionalOffset(
                 dx = offset.dx / size.width,
@@ -25,8 +43,6 @@ data class FractionalOffset(
                 offset = offset - rect.topLeft,
                 size = rect.size
             )
-
-        // TODO
     }
 
     // TODO

@@ -1,8 +1,8 @@
-package com.chrynan.klutter.rendering
+package com.chrynan.klutter.painting
 
 enum class FlutterLogoStyle {
 
-    HORIZONTAL,
     MARK_ONLY,
+    HORIZONTAL,
     STACKED
 }

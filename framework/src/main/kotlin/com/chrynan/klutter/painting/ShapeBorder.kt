@@ -1,6 +1,6 @@
 package com.chrynan.klutter.painting
 
-import com.chrynan.klutter.rendering.EdgeInsets
+import com.chrynan.klutter.rendering.EdgeInsetsGeometry
 import com.chrynan.klutter.ui.Canvas
 import com.chrynan.klutter.ui.Path
 import com.chrynan.klutter.ui.Rect
@@ -8,9 +8,7 @@ import com.chrynan.klutter.ui.TextDirection
 
 interface ShapeBorder {
 
-    val dimensions: EdgeInsets
-
-    fun add(other: ShapeBorder, reversed: Boolean = false): ShapeBorder
+    val dimensions: EdgeInsetsGeometry
 
     fun scale(t: Double): ShapeBorder
 
@@ -18,5 +16,7 @@ interface ShapeBorder {
 
     fun getInnerPath(rect: Rect, textDirection: TextDirection = TextDirection.LTR): Path
 
-    fun paint(canvas: Canvas, textDirection: TextDirection = TextDirection.LTR)
+    fun paint(canvas: Canvas, rect: Rect, textDirection: TextDirection = TextDirection.LTR)
+
+    fun add(other: ShapeBorder, reversed: Boolean = false): ShapeBorder? = null
 }

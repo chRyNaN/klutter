@@ -14,22 +14,55 @@ class CompoundBorder(private val borders: List<ShapeBorder>) : ShapeBorder {
     }
 
     override fun add(other: ShapeBorder, reversed: Boolean): ShapeBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (other !is CompoundBorder) {
+            val ours = if (reversed) borders.last() else borders.first()
+            val merged = ours.add(other = other, reversed = reversed) ?: other.add(other = ours, reversed = !reversed)
+
+            if (merged != null) {
+                val result = mutableListOf<ShapeBorder>().apply {
+                    addAll(borders)
+                }
+                result[if (reversed) result.size - 1 else 0] = merged
+
+                return CompoundBorder(borders = result)
+            }
+        }
+
+        val mergedBorders = mutableListOf<ShapeBorder>()
+
+        if (reversed) mergedBorders.addAll(borders)
+        if (other is CompoundBorder) {
+            mergedBorders.addAll(other.borders)
+        } else {
+            mergedBorders.add(other)
+        }
+        if (!reversed) mergedBorders.addAll(borders)
+
+        return CompoundBorder(borders = mergedBorders)
     }
 
-    override fun scale(t: Double): ShapeBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun scale(t: Double) =
+        CompoundBorder(borders = borders.map { it.scale(t) })
 
-    override fun getOuterPath(rect: Rect, textDirection: TextDirection): Path {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getOuterPath(rect: Rect, textDirection: TextDirection) =
+        borders.first().getOuterPath(rect, textDirection)
 
     override fun getInnerPath(rect: Rect, textDirection: TextDirection): Path {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var newRect = rect
+
+        borders.forEach {
+            newRect = it.dimensions.resolve(textDirection).deflateRect(newRect)
+        }
+
+        return borders.last().getInnerPath(newRect, textDirection)
     }
 
-    override fun paint(canvas: Canvas, textDirection: TextDirection) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun paint(canvas: Canvas, rect: Rect, textDirection: TextDirection) {
+        var newRect = rect
+
+        borders.forEach {
+            it.paint(canvas, newRect, textDirection)
+            newRect = it.dimensions.resolve(textDirection).deflateRect(newRect)
+        }
     }
 }

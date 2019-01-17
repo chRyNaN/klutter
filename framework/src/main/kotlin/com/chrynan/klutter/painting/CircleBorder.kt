@@ -5,29 +5,38 @@ import com.chrynan.klutter.ui.Canvas
 import com.chrynan.klutter.ui.Path
 import com.chrynan.klutter.ui.Rect
 import com.chrynan.klutter.ui.TextDirection
+import kotlin.math.max
 
-class CircleBorder(val side: BorderSide = BorderSide.NONE): ShapeBorder {
+class CircleBorder(val side: BorderSide = BorderSide.NONE) : ShapeBorder {
 
     override val dimensions: EdgeInsets
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        get() = EdgeInsets.all(side.width)
 
-    override fun add(other: ShapeBorder, reversed: Boolean): ShapeBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun scale(t: Double) = CircleBorder(side = side.scale(t))
 
-    override fun scale(t: Double): ShapeBorder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getOuterPath(rect: Rect, textDirection: TextDirection) =
+        Path().also {
+            it.addOval(
+                Rect.fromCircle(
+                    center = rect.center,
+                    radius = rect.shortestSide / 2.0
+                )
+            )
+        }
 
-    override fun getOuterPath(rect: Rect, textDirection: TextDirection): Path {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getInnerPath(rect: Rect, textDirection: TextDirection) =
+        Path().also {
+            it.addOval(
+                Rect.fromCircle(
+                    center = rect.center,
+                    radius = max(0.0, rect.shortestSide / 2.0 - side.width)
+                )
+            )
+        }
 
-    override fun getInnerPath(rect: Rect, textDirection: TextDirection): Path {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun paint(canvas: Canvas, textDirection: TextDirection) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun paint(canvas: Canvas, rect: Rect, textDirection: TextDirection) {
+        if (side.style == BorderStyle.SOLID) {
+            canvas.drawCircle(rect.center, (rect.shortestSide - side.width) / 2.0, side.toPaint())
+        }
     }
 }

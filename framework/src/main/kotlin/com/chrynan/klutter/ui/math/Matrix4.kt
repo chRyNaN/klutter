@@ -150,4 +150,30 @@ class Matrix4(
         internalStorage[entry + 1] = arg.storage[1]
         internalStorage[entry + 0] = arg.storage[0]
     }
+
+    fun perspectiveTransform(arg: Vector3): Vector3 {
+        val x = (storage[0] * arg.storage[0]) +
+                (storage[4] * arg.storage[1]) +
+                (storage[8] * arg.storage[2]) +
+                storage[12]
+        val y = (storage[1] * arg.storage[0]) +
+                (storage[5] * arg.storage[1]) +
+                (storage[9] * arg.storage[2]) +
+                storage[13]
+        val z = (storage[2] * arg.storage[0]) +
+                (storage[6] * arg.storage[1]) +
+                (storage[10] * arg.storage[2]) +
+                storage[14]
+        val w = 1.0 /
+                ((storage[3] * arg.storage[0]) +
+                        (storage[7] * arg.storage[1]) +
+                        (storage[11] * arg.storage[2]) +
+                        storage[15])
+
+        arg.x = (x * w).toFloat()
+        arg.y = (y * w).toFloat()
+        arg.z = (z * w).toFloat()
+
+        return arg
+    }
 }
